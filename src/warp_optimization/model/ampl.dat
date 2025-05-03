@@ -1,0 +1,45 @@
+#average demand table
+#table demand_table "ODBC" "./WARP2011W.mdb" "Average_Demand_Table":
+#    J <- [Product_Num], d ~ Average_Demand;
+#read table demand_table;
+
+#table demand_table IN "forecasted_demands.csv":
+#    J <- [Product_Num], d ~ Average_Demand;
+#read table demand_table;
+
+table prod_demand "ODBC" "./WARP2011W.mdb" "Product_Demand":
+       #J <- [Product_Num], d ~ sum{y in Year, m in Month, s in Store} Demand[y, 2, s];
+       J <- [Product_Num],
+    d ~ sum {y in Year, s in Store: 2 in Month} Demand[y, 2, s];
+      
+read table prod_demand;
+
+#prod master table for sales price
+table product_master "ODBC" "./WARP2011W.mdb" "Product_Master":
+    J <- [Product_Num], s ~ Sales_Price;
+read table product_master;
+
+#raw material table for cost and max quantity
+table raw_material_table "ODBC" "./WARP2011W.mdb" "RM_Master":
+    I <- [RM_Num], rmc ~ Cost, rmq ~ S_Quantity;
+read table raw_material_table;
+
+# warehouse table with costs and capacity
+table warehouse_table "ODBC" "./WARP2011W.mdb" "Warehouse_Master":
+    N <- [Warehouse_Num], opcw ~ Op_Cost, capw ~ Capacity;
+read table warehouse_table;
+
+# bill of matrials table
+table bom_table "ODBC" "./WARP2011W.mdb" "BOM":
+    [RM_Num, Product_Num], rm ~ Quantity;
+read table bom_table;
+
+# machine costs table
+table machine_table "ODBC" "./WARP2011W.mdb" "Machine_Master":
+    K <- [Machine_Num], opm ~ OpCost_per_min;
+read table machine_table;
+
+#machine processing table
+table machineAssgn_table "ODBC" "./WARP2011W.mdb" "Machine_Assign" :
+    [Product_Num, Machine_Num], avgdur ~ Avg_Duration;
+read table machineAssgn_table;
