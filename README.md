@@ -10,6 +10,29 @@ This repository contains all materials and code required to optimize the WARP Sh
 - **Optimization** using the Gurobi solver to maximize profits while respecting constraints.
 - **Scenario Investigations**, such as adjusting machine availability, raw material budgets, or adding warehouse space.
 
+## Project Organization
+
+```
+warp-production-optimization/  
+├── .gitignore  
+├── README.md  
+├── requirements.txt       
+├── reports/                 
+│   └── Case_Study_Report.pdf  
+├── data/  
+│   └── raw/      
+│       └── warp_demands.mdb  
+│ 
+└── src/  
+    └── warp_opt/         
+        ├── __init__.py  
+        ├── extract_demand.py  
+        └── model/           
+            ├── ampl.mod  
+            ├── ampl.dat   
+            └── ampl.run  
+```
+
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Dependencies and Setup](#dependencies-and-setup)
