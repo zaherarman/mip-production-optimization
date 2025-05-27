@@ -1,0 +1,10 @@
+reset;
+
+model ampl.mod;
+data ampl.dat;
+option solver gurobi;
+
+solve;
+
+#display z, a, cons1.slack, cons2.slack, cons3.slack, cons4.slack, cons5.slack > ampl.out;
+display a;
